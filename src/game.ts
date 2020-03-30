@@ -17,6 +17,8 @@ export default class Demo extends Phaser.Scene
         this.load.image("bg_layer5", "assets/layer_03_1920 x 1080.png");
         this.load.image("bg_layer6", "assets/layer_02_1920 x 1080.png");
         this.load.image("bg_layer7", "assets/layer_01_1920 x 1080.png");
+
+        this.load.atlasXML("shoebot_atlas", "assets/shoebot.png", "assets/shoebot.xml");
     }
 
     create() {
@@ -37,6 +39,19 @@ export default class Demo extends Phaser.Scene
             sprite.setOrigin(0, 0); 
             this.layers.push(sprite);
         }
+
+        this.anims.create({ 
+            key: "shoebot_run",
+            frames: this.anims.generateFrameNames("shoebot_atlas", {
+                prefix: "running bot_",
+                suffix: ".png",
+                zeroPad: 4,
+                end: 10
+            }),
+            repeat: -1
+        });
+        console.log(this.anims.get("shoebot_run"));
+        this.add.sprite(100, 100, "shoebot_atlas", "running bot_0000.png").play("shoebot_run");
     }
 
     update() {
