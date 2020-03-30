@@ -2,37 +2,47 @@ import 'phaser';
 
 export default class Demo extends Phaser.Scene
 {
-    constructor ()
-    {
+    layers: Phaser.GameObjects.TileSprite[] = [];
+
+    constructor() {
         super('demo');
     }
 
-    preload ()
-    {
-        this.load.image('logo', 'assets/phaser3-logo.png');
-        this.load.image('libs', 'assets/libs.png');
-        this.load.glsl('bundle', 'assets/plasma-bundle.glsl.js');
-        this.load.glsl('stars', 'assets/starfields.glsl.js');
+    preload () {
+        this.load.image("bg_layer0", "assets/layer_08_1920 x 1080.png");
+        this.load.image("bg_layer1", "assets/layer_07_1920 x 1080.png");
+        this.load.image("bg_layer2", "assets/layer_06_1920 x 1080.png");
+        this.load.image("bg_layer3", "assets/layer_05_1920 x 1080.png");
+        this.load.image("bg_layer4", "assets/layer_04_1920 x 1080.png");
+        this.load.image("bg_layer5", "assets/layer_03_1920 x 1080.png");
+        this.load.image("bg_layer6", "assets/layer_02_1920 x 1080.png");
+        this.load.image("bg_layer7", "assets/layer_01_1920 x 1080.png");
     }
 
-    create ()
-    {
-        this.add.shader('RGB Shift Field', 0, 0, 800, 600).setOrigin(0);
+    create() {
+        console.log("canvas: " + this.game.canvas.width + " x " + this.game.canvas.height);
+        for (let i = 0; i < 8; ++i) {
+            let image = "bg_layer" + i;
+            let sprite = this.add.tileSprite(
+                0,
+                0,
+                this.game.canvas.width,
+                this.game.canvas.height,
+                image
+            );
+            let imageHeight = this.game.textures.get(image).getSourceImage().height;
+            sprite.setTileScale(this.game.canvas.height / imageHeight);
+            sprite.setTilePosition(0, 0);
 
-        this.add.shader('Plasma', 0, 412, 800, 172).setOrigin(0);
+            sprite.setOrigin(0, 0); 
+            this.layers.push(sprite);
+        }
+    }
 
-        this.add.image(400, 300, 'libs');
-
-        const logo = this.add.image(400, 70, 'logo');
-
-        this.tweens.add({
-            targets: logo,
-            y: 350,
-            duration: 1500,
-            ease: 'Sine.inOut',
-            yoyo: true,
-            repeat: -1
-        })
+    update() {
+        for (let i = 0; i < 8; ++i) {
+            this.layers[i].tilePositionX += i / 5.0;
+        }
     }
 }
 
