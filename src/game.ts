@@ -1,5 +1,6 @@
 import 'phaser';
 import PlatformScene from './PlatformScene';
+import DemoScene from './DemoScene';
 
 const config = {
     type: Phaser.AUTO,
@@ -7,7 +8,7 @@ const config = {
     backgroundColor: "rgba(255,110,110,0)",
     width: 1400,
     height: 560,
-    scene: PlatformScene,
+    scene: DemoScene,
     physics: {
         default: "arcade",
         arcade: {
