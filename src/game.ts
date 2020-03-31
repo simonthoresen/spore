@@ -1,5 +1,5 @@
 import 'phaser';
-import CreateTilesetScene from './CreateTilesetScene';
+import PlatformScene from './PlatformScene';
 
 const config = {
     type: Phaser.AUTO,
@@ -7,9 +7,12 @@ const config = {
     backgroundColor: "rgba(255,110,110,0)",
     width: 1400,
     height: 560,
-    scene: CreateTilesetScene,
+    scene: PlatformScene,
     physics: {
-        default: "arcade"
+        default: "arcade",
+        arcade: {
+            gravity: { y: 1000 }
+        }
     }
 };
 
