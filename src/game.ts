@@ -1,12 +1,13 @@
 import 'phaser';
-import GameScene from './GameScene';
+import CreateTilesetScene from './CreateTilesetScene';
 
 const config = {
     type: Phaser.AUTO,
-    backgroundColor: '#125555',
-    width: 800,
-    height: 600,
-    scene: GameScene,
+    transparent: true,
+    backgroundColor: "rgba(255,110,110,0)",
+    width: 1400,
+    height: 560,
+    scene: CreateTilesetScene,
     physics: {
         default: "arcade"
     }
